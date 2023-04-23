@@ -45,8 +45,8 @@ class Election:
         time.sleep(random.randint(1, 5))
         # Retrieval of the relevant parts of the table to be scraping process
         votes = self.browser.find_elements(by=By.XPATH, value='//*[@id="mw-content-text"]/div[1]/table[2]/tbody/'
-                                                              'tr[(position() >= 4 and position() <= 9) or'
-                                                              '(position() >= 14 and position() <= 25)]')
+                                                              'tr[(position() >= 4 and position() <= 8) or'
+                                                              '(position() >= 13 and position() <= 24)]')
         data = []
         #A for loop that traverses line by line and collects data
         for v in votes:
@@ -94,8 +94,6 @@ class Election:
             )
         #Closing a URL
         self.browser.close()
-        #print(data)
-        #print(len(data))
         return data
 
 
