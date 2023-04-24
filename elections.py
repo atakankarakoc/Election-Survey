@@ -19,23 +19,6 @@ class Election:
         #It uses the ChromeDriverManager module to automatically download and install ChromeDriver.
         self.browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=self.chrome_options)
         self.link = link
-        self.__total_akp_votes = 0
-        self.__total_mhp_votes = 0
-        self.__total_bbp_votes = 0
-        self.__total_yrp_votes = 0
-        self.__total_chp_votes = 0
-        self.__total_iyi_votes = 0
-        self.__total_deva_votes = 0
-        self.__total_gp_votes = 0
-        self.__total_sp_votes = 0
-        self.__total_dp_votes = 0
-        self.__total_ysgp_votes = 0
-        self.__total_tip_votes = 0
-        self.__total_zp_votes = 0
-        self.__total_mp_votes = 0
-        self.__total_tdp_votes = 0
-        self.__total_btp_votes = 0
-        self.__total_others_votes = 0
 
     def data_scrapt(self):
         link = self.link
@@ -45,8 +28,8 @@ class Election:
         time.sleep(random.randint(1, 5))
         # Retrieval of the relevant parts of the table to be scraping process
         votes = self.browser.find_elements(by=By.XPATH, value='//*[@id="mw-content-text"]/div[1]/table[2]/tbody/'
-                                                              'tr[(position() >= 4 and position() <= 8) or'
-                                                              '(position() >= 13 and position() <= 24)]')
+                                                              'tr[(position() >= 4 and position() <= 9) or'
+                                                              '(position() >= 14 and position() <= 25)]')
         data = []
         #A for loop that traverses line by line and collects data
         for v in votes:
