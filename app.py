@@ -85,70 +85,14 @@ def total_vote_calc(grouped_data, grouped_data2):
     return totals, totals2
 
 def grouped_yy(grouped_data, grouped_data2):
-    metropoll_y, asal_y, areda_y, iea_y, saros_y, yoneylem_y, artibir_y = [], [], [], [], [], [], []
-    optimar_y, avrasya_y, bulgu_y, orc_y, mak_y, aksoy_y, genar_y = [], [], [], [], [], [], []
-    themis_y, piar_y, area_y, sonar_y, hbs_y, alf_y, artibir_y2 = [], [], [], [], [], [], []
-    orc_y2, areda_y2, yoneylem_y2, mak_y2, avrasya_y2, optimar_y2, aksoy_y2 = [], [], [], [], [], [], []
-    team_y, tusiar_y, bulgu_y2, area_y2, sonar_y, ada_y, sosyo_y = [], [], [], [], [], [], []
+    grouped_y, grouped_y2 = [], []
 
-    value_lists = [[] for i in range(len(grouped_data[0]))]
     for d in grouped_data:
-        for i, value in enumerate(d.values()):
-            value_lists[i].append(value)
-    for l, j in zip(value_lists, range(len(value_lists))):
-        if (j == 0 or j == 1):
-            continue
-        else:
-            ada_y.append(l[0])
-            aksoy_y.append(l[1])
-            optimar_y.append(l[2])
-            sosyo_y.append(l[3])
-            areda_y.append(l[4])
-            team_y.append(l[5])
-            tusiar_y.append(l[6])
-            artibir_y.append(l[7])
-            bulgu_y.append(l[8])
-            orc_y.append(l[9])
-            area_y.append(l[10])
-            sonar_y.append(l[11])
-            yoneylem_y.append(l[12])
-            mak_y.append(l[13])
-            hbs_y.append(l[14])
-            alf_y.append(l[15])
-            avrasya_y.append(l[16])
-
-    grouped_y = [ada_y, aksoy_y, optimar_y, sosyo_y, areda_y, team_y, tusiar_y, artibir_y, bulgu_y,
-                 orc_y, area_y, sonar_y, yoneylem_y, mak_y, hbs_y, alf_y, avrasya_y ]
-
-    value_lists = [[] for i in range(len(grouped_data2[0]))]
+        values = list(d.values())[0:]
+        grouped_y.append(values[2:])
     for d in grouped_data2:
-        for i, value in enumerate(d.values()):
-            value_lists[i].append(value)
-
-
-    for l, j in zip(value_lists, range(len(value_lists))):
-        if (j == 0 or j == 1):
-            continue
-        else:
-            metropoll_y.append(l[0])
-            asal_y.append(l[1])
-            areda_y2.append(l[2])
-            iea_y.append(l[3])
-            saros_y.append(l[4])
-            yoneylem_y2.append(l[5])
-            artibir_y2.append(l[6])
-            optimar_y2.append(l[7])
-            avrasya_y2.append(l[8])
-            bulgu_y2.append(l[9])
-            orc_y2.append(l[10])
-            mak_y2.append(l[11])
-            aksoy_y2.append(l[12])
-            genar_y.append(l[13])
-            themis_y.append(l[14])
-            piar_y.append(l[15])
-
-    grouped_y2 = [metropoll_y, asal_y, areda_y2, iea_y, saros_y, yoneylem_y2, artibir_y2, optimar_y2,
-                  avrasya_y2, bulgu_y2, orc_y2, mak_y2, aksoy_y2, genar_y, themis_y, piar_y]
+        values = list(d.values())[0:]
+        grouped_y2.append(values[2:])
 
     return grouped_y, grouped_y2
 
