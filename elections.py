@@ -1,3 +1,4 @@
+import math
 import time
 import random
 from selenium import webdriver
@@ -27,12 +28,50 @@ class Election:
         # waiting a randomly time
         time.sleep(random.randint(1, 5))
         # Retrieval of the relevant parts of the table to be scraping process
-        votes = self.browser.find_elements(by=By.XPATH, value='//*[@id="mw-content-text"]/div[1]/table[2]/tbody/'
-                                                              'tr[(position() >= 4 and position() <= 9) or'
-                                                              '(position() >= 14 and position() <= 25)]')
+        votes = self.browser.find_elements(by=By.XPATH, value='//*[@id="mw-content-text"]/div[1]/table[1]/tbody/'
+                                                              'tr[(position() >= 4 and position() <= 23) or '
+                                                               '(position() = 26 or position() = 29)]')
+        votes2 = self.browser.find_elements(by=By.XPATH, value='//*[@id="mw-content-text"]/div[1]/table[2]/tbody/'
+                                                               'tr[(position() >= 4 and position() <= 6) or'
+                                                               '(position() >= 8 and position() <= 10) or'
+                                                               '(position() >= 15 and position() <= 21) or'
+                                                               '(position() >= 23 and position() <= 27)]')
         data = []
-        #A for loop that traverses line by line and collects data
+        data2 = []
+        #For table1, a for loop that traverses line by line and collects data
         for v in votes:
+            survey_company = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(2) > a')
+            sample = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(3)')
+            votes_per_akp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(4)')
+            votes_per_mhp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(5)')
+            votes_per_bbp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(6)')
+            votes_per_yrp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(7)')
+            votes_per_chp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(9)')
+            votes_per_iyi = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(10)')
+            votes_per_ysgp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(12)')
+            votes_per_tip = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(13)')
+            votes_per_zp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(15)')
+            votes_per_mp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(16)')
+            votes_per_others = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(17)')
+            data.append(
+                {
+                    'company': survey_company[0].text,
+                    'sample': convert(sample[0].text),
+                    'akp_vote': realvote(convert(sample[0].text), votes_per_akp[0].text),
+                    'mhp_vote': realvote(convert(sample[0].text), votes_per_mhp[0].text),
+                    'bbp_vote': realvote(convert(sample[0].text), votes_per_bbp[0].text),
+                    'yrp_vote': realvote(convert(sample[0].text), votes_per_yrp[0].text),
+                    'chp_vote': realvote(convert(sample[0].text), votes_per_chp[0].text),
+                    'iyi_vote': realvote(convert(sample[0].text), votes_per_iyi[0].text),
+                    'ysgp_vote': realvote(convert(sample[0].text), votes_per_ysgp[0].text),
+                    'tip_vote': realvote(convert(sample[0].text), votes_per_tip[0].text),
+                    'zp_vote': realvote(convert(sample[0].text), votes_per_zp[0].text),
+                    'mp_vote': realvote(convert(sample[0].text), votes_per_mp[0].text),
+                    'others_vote': realvote(convert(sample[0].text), votes_per_others[0].text)
+                }
+            )
+        # For table2, a for loop that traverses line by line and collects data
+        for v in votes2:
             survey_company = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(2) > a')
             sample = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(3)')
             votes_per_akp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(4)')
@@ -52,7 +91,7 @@ class Election:
             votes_per_tdp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(21)')
             votes_per_btp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(22)')
             votes_per_others = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(23)')
-            data.append(
+            data2.append(
                 {
                     'company': survey_company[0].text,
                     'sample': convert(sample[0].text),
@@ -77,7 +116,7 @@ class Election:
             )
         #Closing a URL
         self.browser.close()
-        return data
+        return data, data2
 
 
 def realvote(sample, votes_per):
@@ -85,7 +124,7 @@ def realvote(sample, votes_per):
     #After this process, the number of people who voted is found.
     if ',' in votes_per:
         votes_per = votes_per.replace(',', '.')
-        vote_count = round((sample * float(votes_per)) / 100)
+        vote_count = math.ceil((sample * float(votes_per)) / 100)
         return vote_count
     return 0
 
