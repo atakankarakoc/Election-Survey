@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+    <div class="d-flex justify-content-center">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Election Surveys</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#Table1">Table1</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#Özdemir">Özdemir</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#BETİMAR">BETİMAR</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#Areda Survey">Areda Survey</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#Aksoy">Aksoy</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#ORC">ORC</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#Optimar">Optimar</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#Yöneylem">Yöneylem</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#MetroPOLL">MetroPOLL</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#Argetus">Argetus</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#Remres">Remres</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Other Companies
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#ADA">ADA</a></li>
+                    <li><a class="dropdown-item" href="#Area">Area</a></li>
+                    <li><a class="dropdown-item" href="#İEA">İEA</a></li>
+                    <li><a class="dropdown-item" href="#ALF">ALF</a></li>
+                    <li><a class="dropdown-item" href="#İvem">İvem</a></li>
+                    <li><a class="dropdown-item" href="#Bulgu">Bulgu</a></li>
+                    <li><a class="dropdown-item" href="#Gezici">Gezici</a></li>
+                    <li><a class="dropdown-item" href="#KONDA">KONDA</a></li>
+                    <li><a class="dropdown-item" href="#SAROS">SAROS</a></li>
+                    <li><a class="dropdown-item" href="#Avrasya">Avrasya</a></li>
+                    <li><a class="dropdown-item" href="#MAK">MAK</a></li>
+                    <li><a class="dropdown-item" href="#ASAL">ASAL</a></li>
+                    <li><a class="dropdown-item" href="#HBS">HBS</a></li>
+                    <li><a class="dropdown-item" href="#Sosyo Politik">Sosyo Politik</a></li>
+                    <li><a class="dropdown-item" href="#TEAM">TEAM</a></li>
+                    <li><a class="dropdown-item" href="#TÜSİAR">TÜSİAR</a></li>
+                    <li><a class="dropdown-item" href="#Artıbir">Artıbir</a></li>
+                    <li><a class="dropdown-item" href="#SONAR">SONAR</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </div>
+    <div class="container"></div>
+    <center><p><h2>Table 1</h2></p></center>
+    <div class="container">
+      <table class="table" id="Table1">
+        <thead>
+          <tr>
+            <th scope="col">Company Name</th>
+            <th scope="col">Sample</th>
+            <th scope="col">AKP</th>
+            <th scope="col">MHP</th>
+            <th scope="col">BBP</th>
+            <th scope="col">YRP</th>
+            <th scope="col">CHP</th>
+            <th scope="col">İYİ</th>
+            <th scope="col">YSGP</th>
+            <th scope="col">TİP</th>
+            <th scope="col">ZP</th>
+            <th scope="col">MP</th>
+            <th scope="col">Others</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in data %}
+            <tr>
+              <td>{{ d['company'] }}</td>
+              <td style="text-align: left" >{{ d['sample'] }}</td>
+              <td style="text-align: left" >{{ d['akp_vote'] }}</td>
+              <td style="text-align: left" >{{ d['mhp_vote'] }}</td>
+              <td style="text-align: left" >{{ d['bbp_vote'] }}</td>
+              <td style="text-align: left" >{{ d['yrp_vote'] }}</td>
+              <td style="text-align: left" >{{ d['chp_vote']}}</td>
+              <td style="text-align: left" >{{ d['iyi_vote'] }}</td>
+              <td style="text-align: left" >{{ d['ysgp_vote'] }}</td>
+              <td style="text-align: left" >{{ d['tip_vote'] }}</td>
+              <td style="text-align: left" >{{ d['zp_vote'] }}</td>
+              <td style="text-align: left" >{{ d['mp_vote'] }}</td>
+              <td style="text-align: left" >{{ d['others_vote'] }}</td>
+            </tr>
+          {% endfor %}
+            <tr>
+              <td>{{ total[0] }}</td>
+              <td>{{ total[1] }}</td>
+              <td>{{ total[2] }}</td>
+              <td>{{ total[3] }}</td>
+              <td>{{ total[4] }}</td>
+              <td>{{ total[5] }}</td>
+              <td>{{ total[6] }}</td>
+              <td>{{ total[7] }}</td>
+              <td>{{ total[8] }}</td>
+              <td>{{ total[9] }}</td>
+              <td>{{ total[10] }}</td>
+              <td>{{ total[11] }}</td>
+              <td>{{ total[12] }}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container-lg">
+        <div class="container text-center">
+          <div class="row align-items-start">
+            <div class="col">
+              <h3>Table 1 Overall</h3>
+            </div>
+          </div>
+          <div class="row align-items-start">
+            <div class="col">
+              <img src="data:image/png;base64, {{ total_chart }}" width="100%" height="100%">
+            </div>
+            <div class="col">
+              <img src="data:image/png;base64, {{ total_pie }}" width="100%" height="100%">
+            </div>
+          </div>
+        </div>
+      </div>
+    {% for d in data %}
+      <div class="container-lg">
+        <div class="container text-center">
+          <div class="row align-items-start" id="{{d['company'] }}">
+            <div class="col">
+              <h3>Table 1</h3>
+              <h3>{{ d['company'] }}</h3>
+            </div>
+          </div>
+          <div class="row align-items-start">
+            <div class="col">
+              <img src="data:image/png;base64, {{ table1_bar[loop.index0] }}" width="100%" height="105%">
+            </div>
+            <div class="col">
+              <img src="data:image/png;base64, {{ table1_pie[loop.index0] }}" width="100%" height="105%">
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>

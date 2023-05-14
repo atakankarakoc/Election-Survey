@@ -29,18 +29,14 @@ class Election:
         time.sleep(random.randint(1, 5))
         # Retrieval of the relevant parts of the table to be scraping process
         votes = self.browser.find_elements(by=By.XPATH, value='//*[@id="mw-content-text"]/div[1]/table[1]/tbody/'
-                                                              'tr[(position() >= 4 and position() <= 23) or '
-                                                               '(position() = 26 or position() = 29)]')
-        votes2 = self.browser.find_elements(by=By.XPATH, value='//*[@id="mw-content-text"]/div[1]/table[2]/tbody/'
-                                                               'tr[(position() >= 4 and position() <= 6) or'
-                                                               '(position() >= 8 and position() <= 10) or'
-                                                               '(position() >= 15 and position() <= 21) or'
-                                                               '(position() >= 23 and position() <= 27)]')
+                                                              'tr[(position() >= 5 and position() <= 30) or'
+                                                              '(position() >= 32 and position() <= 53) or '
+                                                               '(position() = 56 or position() = 59)]')
+
         data = []
-        data2 = []
         #For table1, a for loop that traverses line by line and collects data
         for v in votes:
-            survey_company = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(2) > a')
+            survey_company = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(2) > a:nth-child(1)')
             sample = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(3)')
             votes_per_akp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(4)')
             votes_per_mhp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(5)')
@@ -70,8 +66,25 @@ class Election:
                     'others_vote': realvote(convert(sample[0].text), votes_per_others[0].text)
                 }
             )
+        #Closing a URL
+        self.browser.close()
+        return data
+
+    def data_scrapt2(self):
+        link = self.link
+        # URL open, initialize
+        self.browser.get(link)
+        # waiting a randomly time
+        time.sleep(random.randint(1, 5))
+        # Retrieval of the relevant parts of the table to be scraping process
+        votes = self.browser.find_elements(by=By.XPATH, value='//*[@id="mw-content-text"]/div[1]/table[2]/tbody/'
+                                                               'tr[(position() >= 4 and position() <= 6) or'
+                                                               '(position() >= 8 and position() <= 10) or'
+                                                               '(position() >= 15 and position() <= 21) or'
+                                                               '(position() >= 23 and position() <= 27)]')
+        data = []
         # For table2, a for loop that traverses line by line and collects data
-        for v in votes2:
+        for v in votes:
             survey_company = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(2) > a')
             sample = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(3)')
             votes_per_akp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(4)')
@@ -91,7 +104,7 @@ class Election:
             votes_per_tdp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(21)')
             votes_per_btp = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(22)')
             votes_per_others = v.find_elements(by=By.CSS_SELECTOR, value='td:nth-child(23)')
-            data2.append(
+            data.append(
                 {
                     'company': survey_company[0].text,
                     'sample': convert(sample[0].text),
@@ -114,10 +127,9 @@ class Election:
                     'others_vote': realvote(convert(sample[0].text), votes_per_others[0].text)
                 }
             )
-        #Closing a URL
+        # Closing a URL
         self.browser.close()
-        return data, data2
-
+        return data
 
 def realvote(sample, votes_per):
     #float doesn't accept comma ",". This why, we convert all percentiles into dot ".".
@@ -139,8 +151,8 @@ def convert(sample):
 if __name__ == "__main__": #This module will be used as the main program
     elections = Election(
         #The URL of the site where the scraping will be done
-        link="https://tr.wikipedia.org/wiki/%C3%9Clke_%C3%A7ap%C4%B1nda_2023_T%C3%BCrkiye_genel_"
-             "se%C3%A7imleri_i%C3%A7in_yap%C4%B1lan_anketler",
+        link="https://tr.wikipedia.org/wiki/%C3%9Clke_%C3%A7ap%C4%B1nda_2023_T%C3%BCrkiye_genel_se%C3%A7imleri_"
+             "i%C3%A7in_yap%C4%B1lan_anketler",
         #The web browser is clearly displayed.
         headless=False
     )
