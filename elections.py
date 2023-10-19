@@ -29,9 +29,9 @@ class Election:
         time.sleep(random.randint(1, 5))
         # Retrieval of the relevant parts of the table to be scraping process
         votes = self.browser.find_elements(by=By.XPATH, value='//*[@id="mw-content-text"]/div[1]/table[1]/tbody/'
-                                                              'tr[(position() >= 5 and position() <= 30) or'
-                                                              '(position() >= 32 and position() <= 53) or '
-                                                               '(position() = 56 or position() = 59)]')
+                                                              'tr[(position() >= 1 and position() <= 26) or'
+                                                              '(position() >= 28 and position() <= 49) or '
+                                                               '(position() = 52 or position() = 55)]')
 
         data = []
         #For table1, a for loop that traverses line by line and collects data
@@ -82,6 +82,7 @@ class Election:
                                                                '(position() >= 8 and position() <= 10) or'
                                                                '(position() >= 15 and position() <= 21) or'
                                                                '(position() >= 23 and position() <= 27)]')
+
         data = []
         # For table2, a for loop that traverses line by line and collects data
         for v in votes:
